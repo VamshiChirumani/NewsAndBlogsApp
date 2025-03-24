@@ -9,7 +9,7 @@ import axios from 'axios'
 
 const categories = [
   'general',
-  'bussiness',
+  'business',
   'health',
   'technology',
   'sports',
@@ -23,19 +23,25 @@ const News = () => {
   const [news, setNews] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('general');
 
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
 
   useEffect(()=>{
     const fetchNews = async ()=>{
       const apikey1 = import.meta.env.VITE_NEWS_API_KEY;
       // const apikey = import.meta.env.VITE_NEWS_API_KEY_fake;
       const apikey = import.meta.env.VITE_NEWS_API2;
-      const url =
-        "https://newsapi.org/v2/top-headlines?country=us&apiKey=";
-      const response = await axios.get(url+apikey);
-
+      let  url = `https://newsapi.org/v2/top-headlines?category=${selectedCategory}&country=us&apiKey=`;
       
+      if(searchQuery){
+        url=`https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=`
+        
+      }
+      
+      const response = await axios.get(url + apikey);
+
       const fetchedNews = response.data.articles
-      console.log(fetchedNews);
       fetchedNews.forEach((article)=>{
         if(!article.urlToImage){
           article.urlToImage = noImg;
@@ -44,19 +50,31 @@ const News = () => {
 
       setHeadline(fetchedNews[0]); 
       setNews(fetchedNews.slice(1,7));
-      console.log(fetchedNews[0]);
 
     };
     fetchNews();
-  },[selectedCategory])
+  },[selectedCategory,searchQuery])
+
+  const handleCategoryClick = (e, category) =>{
+    e.preventDefault();
+    setSelectedCategory(category);
+    setSearchQuery('')
+  }
+
+  const handleSearch = (e)=>{
+    e.preventDefault()
+    setSearchQuery(searchInput)
+    setSearchInput('')
+  }
 
   return (
     <div className="news">
       <header className="news-header">
         <h1 className="logo">News & Blogs</h1>
         <div className="search-bar">
-          <form>
-            <input type="text" placeholder="search..." />
+          <form onSubmit={handleSearch}>
+            <input type="text" placeholder="search..."
+            value={searchInput} onChange={(e)=>{setSearchInput(e.target.value)}} />
             <button type="submit">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -72,30 +90,17 @@ const News = () => {
           <nav className="categories">
             <h1 className="nav-headings">Categories</h1>
             <div className="nav-links">
-              <a href="#" className="nav-link">
-                General
-              </a>
-              <a href="#" className="nav-link">
-                Business
-              </a>
-              <a href="#" className="nav-link">
-                Technology
-              </a>
-              <a href="#" className="nav-link">
-                Entertainment
-              </a>
-              <a href="#" className="nav-link">
-                Sports
-              </a>
-              <a href="#" className="nav-link">
-                Science
-              </a>
-              <a href="#" className="nav-link">
-                Health
-              </a>
-              <a href="#" className="nav-link">
-                Nation
-              </a>
+              {categories.map((category) => (
+                <a
+                  href="#"
+                  key={category}
+                  onClick={(e) => handleCategoryClick(e, category)}
+                  className="nav-link"
+                >
+                  {category}
+                </a>
+              ))}
+
               <a href="#" className="nav-link">
                 Bookmarks <i className="fa-regular fa-bookmark"></i>
               </a>
