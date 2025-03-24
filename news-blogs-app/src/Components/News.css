@@ -113,6 +113,7 @@
     flex-direction: column;
     row-gap: 2rem;
     padding: 2rem;
+    text-transform: uppercase;
 }
 
 .nav-headings{

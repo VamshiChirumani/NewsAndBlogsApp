@@ -4,6 +4,7 @@ import Calendar from './Calendar'
 import './News.css'
 import userImg from '../assets/images/DSC05373.JPG'
 import noImg from '../assets/images/no-img.png'
+import NewsModal from './NewsModal'
 import axios from 'axios'
 
 
@@ -29,9 +30,8 @@ const News = () => {
 
   useEffect(()=>{
     const fetchNews = async ()=>{
-      const apikey1 = import.meta.env.VITE_NEWS_API_KEY;
-      // const apikey = import.meta.env.VITE_NEWS_API_KEY_fake;
-      const apikey = import.meta.env.VITE_NEWS_API2;
+      
+      const apikey = import.meta.env.VITE_NEWS_API_KEY;
       let  url = `https://newsapi.org/v2/top-headlines?category=${selectedCategory}&country=us&apiKey=`;
       
       if(searchQuery){
@@ -130,6 +130,7 @@ const News = () => {
             ))}
           </div>
         </div>
+        <NewsModal />
         <div className="my-blogs">My Blogs</div>
         <div className="weather-calendar">
           <Weather />
