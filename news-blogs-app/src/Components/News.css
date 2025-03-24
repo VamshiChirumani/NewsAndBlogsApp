@@ -176,6 +176,7 @@
     border-radius: 1rem;
     margin-bottom: 2rem;
     position: relative;
+    
 }
 
 .headline-title{
@@ -190,6 +191,7 @@
     color: #fff;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 0 0 1rem 1rem;
+    cursor: pointer;
 }
 
 .bookmark{
@@ -241,6 +243,7 @@
     background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     border-radius: 0 0 1rem 1rem;
+    cursor: pointer;
 }
 
 .news-grid-item img{

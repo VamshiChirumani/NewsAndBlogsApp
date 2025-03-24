@@ -1,31 +1,50 @@
-import React from 'react'
-import demoImg from '../assets/images/demo.jpg'
-import './NewsModal.css'
+import React from "react";
+import demoImg from "../assets/images/demo.jpg";
+import "./NewsModal.css";
 
-const NewsModal = () => {
+const NewsModal = ({ show, article, onClose }) => {
+  if (!show) {
+    return null;
+  }
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <span className="close-button">
-          <i className="fa-solid fa-xmark"></i>
+          <i className="fa-solid fa-xmark" onClick={onClose}></i>
         </span>
-        <img className='modal-image' src={demoImg} alt="Modal Image" />
-        <h2 className="modal-title">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci,
-          in?
-        </h2>
-        <p className="modal-source">Source: ource of article</p>
-        <p className="modal-date">Some random Date</p>
-        <p className="modal-content-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi
-          reprehenderit non vero cum vel! Est, nulla obcaecati. Eum dicta,
-          voluptatum sequi distinctio ut voluptatem. Nam dolorum eligendi amet
-          porro illo tempore. Quaerat nihil voluptatum sapiente!
-        </p>
-        <a href="#" className="read-more-link">Read More</a>
+        {article && (
+          <>
+            <img
+              className="modal-image"
+              src={article.urlToImage}
+              alt={article.title}
+            />
+            <h2 className="modal-title">{article.title}</h2>
+            <p className="modal-source">Source: {article.source.name}</p>
+            <p className="modal-date">
+              {new Date(article.publishedAt).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+            <p className="modal-content-text">{article.description}</p>
+            <a
+              href={article.url}
+              className="read-more-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read More
+            </a>
+          </>
+        )}
       </div>
     </div>
   );
-}
+};
 
-export default NewsModal
+export default NewsModal;
