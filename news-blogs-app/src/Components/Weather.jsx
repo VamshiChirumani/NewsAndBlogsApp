@@ -93,7 +93,7 @@ const Weather = () => {
       </div>
 
       {data.notFound ? (
-        <div> Not Found 😢</div>
+        <div className="not-found"> Not Found 😢</div>
       ) : (
         <div className="weather-data">
           {data.weather &&

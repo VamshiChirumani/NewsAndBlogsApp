@@ -88,7 +88,7 @@
 }
 
 .weather-data i.bxs-cloud-snow {
-    color: #52e5e7;
+    color: #52e5e7 ;
 }
 
 .weather-type,
@@ -96,4 +96,11 @@
     font-family: 'Comfortaa', sans-serif;
     font-size: 2rem;
     color: #ddd;
+}
+
+.not-found{
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 2rem;
+    color: #ddd;
+    margin-bottom: 12rem;
 }
