@@ -219,7 +219,14 @@ const News = () => {
           <Calendar />
         </div>
       </div>
-      <footer className="news-footer">Footer</footer>
+      <footer className="news-footer">
+        <p>
+          <span>News and Blogs App</span>
+        </p>
+        <p>
+          &copy; All rights reserved
+        </p>
+      </footer>
     </div>
   );
 }
