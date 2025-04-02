@@ -3,6 +3,10 @@ import Weather from './Weather'
 import Calendar from './Calendar'
 import './News.css'
 import userImg from '../assets/images/DSC05373.JPG'
+import blogImg1 from '../assets/images/blog1.jpg'
+import blogImg2 from '../assets/images/blog2.jpg'
+import blogImg3 from '../assets/images/blog3.jpg'
+import blogImg4 from '../assets/images/blog4.jpg'
 import noImg from '../assets/images/no-img.png'
 import NewsModal from './NewsModal'
 import Bookmarks from './Bookmarks'
@@ -20,7 +24,7 @@ const categories = [
   'entertainment'
 ]
 
-const News = () => {
+const News = ({onShowBlogs, blogs}) => {
 
   const [headline, setHeadline] = useState(null);
   const [news, setNews] = useState([]);
@@ -119,7 +123,7 @@ const News = () => {
       </header>
       <div className="news-content">
         <div className="nav-bar">
-          <div className="user">
+          <div className="user" onClick={onShowBlogs}>
             <img src={userImg} alt="User Image" />
             <p>Vamshi's Blog</p>
           </div>
@@ -213,13 +217,38 @@ const News = () => {
           onSelectArticle={handleArticleClick}
           onDeleteBookmark={handleBookmarkClick}
         />
-        <div className="my-blogs">My Blogs</div>
+        <div className="my-blogs">
+          <h1 className="my-blogs-heading">My Blog Posts</h1>
+          <div className="blog-posts">
+            {blogs.map((blog,index) => (
+              <div key={index} className="blog-post"> 
+                
+              <img src={blog.image || noImg} alt={blog.title} />
+              <h3>{blog.title}</h3>
+              {/* <p>{blog.content}</p> */}
+              <div className="post-buttons">
+                <button className="edit-post">
+                  <i className="bx bxs-edit"></i>
+                </button>
+                <button className="delete-post">
+                  <i className="bx bxs-x-circle"></i>
+                </button>
+              </div>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="weather-calendar">
           <Weather />
           <Calendar />
         </div>
       </div>
-      <footer className="news-footer">Footer</footer>
+      <footer className="news-footer">
+        <p>
+          <span>News and Blogs App</span>
+        </p>
+        <p>&copy; All rights reserved</p>
+      </footer>
     </div>
   );
 }
