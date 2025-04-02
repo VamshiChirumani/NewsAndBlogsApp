@@ -40,7 +40,6 @@ const Weather = () => {
         console.error("An unexpected error occured", error);
       }
     }
-    console.log(data);
   };
 
   const handleInputChange = (e) => {
